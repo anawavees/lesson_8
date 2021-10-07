@@ -36,3 +36,17 @@ book = CookBook('./2_files/recipes.txt')
 print(book)
 
 book.get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+
+class ReadFiles:
+    def __init__(self, file_name):
+        self.file_name = file_name
+        temp_dist = {}
+        count = 0
+        with open(file_name, "r", encoding='utf-8') as f:
+            counter = int(file_name.readline())
+            print(counter)
+
+file = ReadFiles('./sorted/1.txt')
+print(file)
+
+
