@@ -52,12 +52,9 @@ if list_files:
     temp_dist = {}
     for file_name in list_files:
         with open(file_name, 'r', encoding='utf-8') as fr, open(new_file, 'a', encoding='utf-8') as fw:
-            # дописываем строку с названием файла
-            # fw.write(f'\n\n------------ {file_name}\n\n')
             count = 0
             for line in fr:
                 count +=1
-            # fw.write(f'{count}\n')
             temp_dist[file_name] = count
     # print((temp_dist))
     sorted_values = sorted(temp_dist.values())  # Sort the values
