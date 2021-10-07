@@ -37,16 +37,45 @@ print(book)
 
 book.get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
 
-class ReadFiles:
-    def __init__(self, file_name):
-        self.file_name = file_name
-        temp_dist = {}
-        count = 0
-        with open(file_name, "r", encoding='utf-8') as f:
-            counter = int(file_name.readline())
-            print(counter)
+import glob, os
 
-file = ReadFiles('./sorted/1.txt')
-print(file)
+path = '.\sorted'
+pattern = '*.txt'
+
+glob_path = os.path.join(path, pattern)
+list_files = glob.glob(glob_path)
+# расширение нового файла установим как '.all'
+new_file = 'new_file.all'
+
+# чтение и запись
+if list_files:
+    temp_dist = {}
+    for file_name in list_files:
+        with open(file_name, 'r', encoding='utf-8') as fr, open(new_file, 'a', encoding='utf-8') as fw:
+            # дописываем строку с названием файла
+            # fw.write(f'\n\n------------ {file_name}\n\n')
+            count = 0
+            for line in fr:
+                count +=1
+            # fw.write(f'{count}\n')
+            temp_dist[file_name] = count
+    # print((temp_dist))
+    sorted_values = sorted(temp_dist.values())  # Sort the values
+    sorted_dict = {}
+    for i in sorted_values:
+        for k in temp_dist.keys():
+            if temp_dist[k] == i:
+                sorted_dict[k] = temp_dist[k]
+                break
+    # print(sorted_dict)
+    for file, count_line in sorted_dict.items():
+        with open(file, 'r', encoding='utf-8') as fr, open(new_file, 'a', encoding='utf-8') as fw:
+            fw.write(f'\n\n------------ {file}\n\n')
+            fw.write(f'{count_line}\n')
+            for line_new in fr:
+                fw.write(line_new)
+
+
+
 
 
